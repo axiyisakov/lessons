@@ -28,9 +28,9 @@ void main() {
     print('Data::$data');
   });
 
-  final Option<num> result2 = service.divideUsingOption(30, -2);
+  final Option<num> result2 = service.divideUsingOption(30, 0);
   result2.fold(() {
-    print('Data::Invalid data');
+    print('Data::b nol bo\'lishi mumkin emas');
   }, (data) {
     print('Data::$data');
   });
