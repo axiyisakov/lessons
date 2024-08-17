@@ -26,4 +26,11 @@ void main() {
 
   print('result3: $result3');
   print('result4: $result4');
+
+  ///[Option] classidan foydalanib qiymatlarini o'zgaritiramiz
+  final doubledResult1 = option.map((value) => value * 2);
+  print('doubledResult1:${doubledResult1.getOrElse(() => -1)}');
+
+  final incrementedResult1 = option.flatMap((value) => Some(value + 1));
+  print('incrementedResult1: ${incrementedResult1.getOrElse(() => -1)}');
 }
