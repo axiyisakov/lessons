@@ -29,8 +29,13 @@ void main() {
   final result3 = dataOrError.fold((error) => error, (data) => data);
   final result4 = dataOrError2.fold((error) => error, (data) => data);
 
+  final result3GetOrElse = dataOrError.getOrElse(() => -1);
+  final result4GetOrElse = dataOrError2.getOrElse(() => -1);
+
   print('result3: $result3');
   print('result4: $result4');
+  print('result3GetOrElse: $result3GetOrElse');
+  print('result4GetOrElse: $result4GetOrElse');
 
   ///[Option] classidan foydalanib qiymatlarini o'zgaritiramiz
   final doubledResult1 = option.map((value) => value * 2);
