@@ -8,16 +8,52 @@
 *===============================================================================
 */
 
-enum ExceptionType { invalidData, validData }
+import 'package:dartz/dartz.dart';
 
-typedef MyRecord = ({ExceptionType exceptionType, String? data});
+typedef MyRecord = ({String? exception, num? data});
 
-class HelloWorldService {
-  MyRecord helloWorld(bool hasData) {
-    if (hasData) {
-      return (exceptionType: ExceptionType.validData, data: 'Hello World');
-    } else {
-      return (exceptionType: ExceptionType.invalidData, data: null);
+abstract interface class ICalculator {
+  MyRecord add(num a, num b);
+  Either<String, num> addUsingEither(num a, num b);
+  Option<num> addUsingOption(num a, num b);
+
+  Option<num> get pi;
+}
+
+class Calculator implements ICalculator {
+  @override
+  MyRecord add(num a, num b) {
+    try {
+      return (exception: null, data: a + b);
+    } catch (e) {
+      return (exception: e.toString(), data: null);
+    }
+  }
+
+  @override
+  Option<num> addUsingOption(num a, num b) {
+    try {
+      return Some(a + b);
+    } catch (e) {
+      return None();
+    }
+  }
+
+  @override
+  Either<String, num> addUsingEither(num a, num b) {
+    try {
+      return Right(a + b);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  @override
+  Option<num> get pi {
+    try {
+      return Some(3.14);
+    } catch (e) {
+      return None();
     }
   }
 }
