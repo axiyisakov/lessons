@@ -13,9 +13,9 @@ import 'package:dartz/dartz.dart';
 
 /// [dartz] paketiga oddiy misollar
 void main() {
-  final ICalculator service = Calculator();
+  final ICalculatorWrapper service = CalculatorWrapper();
 
-  final Option<num> result1 = service.addUsingOption(23, 2.5);
+  final Option<num> result1 = service.divideUsingOption(23, 2.5);
 
   final incrementedResult1 = result1.map((value) => value + 1);
   final doubledResult1 = result1.flatMap((value) => Some(value * 2));

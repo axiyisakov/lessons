@@ -12,8 +12,8 @@ import 'package:dartz/dartz.dart';
 
 void main() {
   ///service class
-  final ICalculator service = Calculator();
-  final MyRecord record = service.add(78, 10);
+  final ICalculatorWrapper service = CalculatorWrapper();
+  final MyRecord record = service.divide(78, 10);
 
   if (record.exception == null) {
     print("Data::${record.data}");
@@ -21,14 +21,14 @@ void main() {
     print('Data::Invalid data');
   }
 
-  final Either<String, num> result = service.addUsingEither(23, -2);
+  final Either<String, num> result = service.divideUsingEither(23, -2);
   result.fold((error) {
     print('Error::$error');
   }, (data) {
     print('Data::$data');
   });
 
-  final Option<num> result2 = service.addUsingOption(30, -2);
+  final Option<num> result2 = service.divideUsingOption(30, -2);
   result2.fold(() {
     print('Data::Invalid data');
   }, (data) {

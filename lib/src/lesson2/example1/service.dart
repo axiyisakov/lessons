@@ -12,37 +12,41 @@ import 'package:dartz/dartz.dart';
 
 typedef MyRecord = ({String? exception, num? data});
 
-abstract interface class ICalculator {
-  MyRecord add(num a, num b);
-  Either<String, num> addUsingEither(num a, num b);
-  Option<num> addUsingOption(num a, num b);
-
+abstract interface class ICalculatorWrapper {
+  MyRecord divide(num a, num b);
+  Either<String, num> divideUsingEither(num a, num b);
+  Option<num> divideUsingOption(num a, num b);
   Option<num> get pi;
 }
 
-class Calculator implements ICalculator {
+class CalculatorWrapper implements ICalculatorWrapper {
+  final Calculator calculator;
+  CalculatorWrapper() : calculator = Calculator();
   @override
-  MyRecord add(num a, num b) {
+  MyRecord divide(num a, num b) {
     try {
-      return (exception: null, data: a + b);
+      final result = calculator.divide(a, b);
+      return (exception: null, data: result);
     } catch (e) {
       return (exception: e.toString(), data: null);
     }
   }
 
   @override
-  Option<num> addUsingOption(num a, num b) {
+  Option<num> divideUsingOption(num a, num b) {
     try {
-      return Some(a + b);
+      final result = calculator.divide(a, b);
+      return Some(result);
     } catch (e) {
       return None();
     }
   }
 
   @override
-  Either<String, num> addUsingEither(num a, num b) {
+  Either<String, num> divideUsingEither(num a, num b) {
     try {
-      return Right(a + b);
+      final result = calculator.divide(a, b);
+      return Right(result);
     } catch (e) {
       return Left(e.toString());
     }
@@ -54,6 +58,16 @@ class Calculator implements ICalculator {
       return Some(3.14);
     } catch (e) {
       return None();
+    }
+  }
+}
+
+class Calculator {
+  num divide(num a, num b) {
+    if (b == 0) {
+      throw Exception('b should not be zero');
+    } else {
+      return a / b;
     }
   }
 }
