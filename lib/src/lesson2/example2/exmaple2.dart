@@ -14,8 +14,13 @@ void main() {
   final result1 = option.getOrElse(() => -1);
   final result2 = option2.getOrElse(() => -1);
 
+  final result1Fold = option.fold(() => -1, (value) => value);
+  final result2Fold = option2.fold(() => -1, (value) => value);
+
   print('result1: $result1');
   print('result2: $result2');
+  print('result1Fold: $result1Fold');
+  print('result2Fold: $result2Fold');
 
   ///Error handling uchun [Either] classidan foydalanamiz
   final Either<String, int> dataOrError = Right(45);
