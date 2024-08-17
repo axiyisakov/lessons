@@ -12,6 +12,7 @@ dependencies:
   get_it: ^7.7.0
   injectable: ^2.4.4
   faker: ^2.1.0
+  dartz: ^0.10.1
 
 dev_dependencies:
   lints: ^3.0.0
